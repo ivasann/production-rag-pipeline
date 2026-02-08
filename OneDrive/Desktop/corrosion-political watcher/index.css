@@ -1,0 +1,21 @@
+/* Base placeholders to satisfy build output and provide minimal sensible defaults.
+   Tailwind runs via CDN in index.html, so keep this lightweight. */
+
+:root {
+  --background: 240 5% 96%;
+  --foreground: 240 10% 4%;
+}
+
+body {
+  margin: 0;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.dark body {
+  --background: 240 10% 4%;
+  --foreground: 0 0% 98%;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
