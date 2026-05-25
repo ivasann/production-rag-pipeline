@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="DocQuery turns PDFs into citation-backed, conclusion-first answers using a Barbara Minto inspired Pyramid Principle structure."
+  />
+  <title>DocQuery | Pyramid RAG Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#method">Skip to method</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="DocQuery home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>DocQuery</span>
+      </a>
+      <div class="nav-links">
+        <a href="#method">Method</a>
+        <a href="demo.html">Demo</a>
+        <a href="#proof">Proof</a>
+      </div>
+      <span class="status-pill">Offline demo</span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="kicker">Barbara Minto inspired RAG</p>
+        <h1 id="hero-title">Conclusion-first answers from your documents.</h1>
+        <p class="hero-sub">
+          DocQuery retrieves evidence from PDFs and formats every response like a
+          clear executive memo: answer first, support next, citations last.
+        </p>
+        <div class="hero-actions" aria-label="Primary actions">
+          <a class="btn btn-primary" href="demo.html">Try the demo</a>
+          <a class="btn btn-secondary" href="#method">See the structure</a>
+        </div>
+        <dl class="signal-row" aria-label="Product capabilities">
+          <div>
+            <dt>Input</dt>
+            <dd>PDFs</dd>
+          </div>
+          <div>
+            <dt>Retrieval</dt>
+            <dd>BM25</dd>
+          </div>
+          <div>
+            <dt>Output</dt>
+            <dd>Pyramid answer</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="answer-preview" aria-label="Sample DocQuery answer">
+        <div class="preview-topbar">
+          <span class="window-dot"></span>
+          <span class="window-dot"></span>
+          <span class="window-dot"></span>
+          <span class="preview-title">Pyramid answer</span>
+        </div>
+        <div class="preview-question">
+          <span>Question</span>
+          <p>What should leadership know first?</p>
+        </div>
+        <div class="pyramid-card governing">
+          <span class="card-label">Governing thought</span>
+          <p>Revenue quality improved, but the risk profile shifted toward regulation and supplier concentration.</p>
+        </div>
+        <div class="pyramid-card lines">
+          <span class="card-label">Key lines</span>
+          <ol>
+            <li>Recurring software mix expanded.</li>
+            <li>Margins rose through operating discipline.</li>
+            <li>Two risk clusters need board attention.</li>
+          </ol>
+        </div>
+        <div class="evidence-strip">
+          <span>Annual_Report.pdf p.4</span>
+          <span>Risk_Factors.pdf p.22</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="method-band" id="method" aria-labelledby="method-title">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="kicker">The Minto pattern</p>
+          <h2 id="method-title">The site and the answer follow the same logic.</h2>
+          <p>
+            A professional document assistant should not make the reader hunt.
+            It should present the conclusion, then the argument, then the proof.
+          </p>
+        </div>
+
+        <div class="method-layout">
+          <div class="method-pyramid" aria-label="Pyramid Principle layers">
+            <div class="tier tier-top">
+              <span>Answer</span>
+              <strong>What is true?</strong>
+            </div>
+            <div class="tier tier-mid">
+              <span>Support</span>
+              <strong>Why is it true?</strong>
+            </div>
+            <div class="tier tier-base">
+              <span>Evidence</span>
+              <strong>Where is it proven?</strong>
+            </div>
+          </div>
+
+          <div class="method-table" role="list">
+            <article role="listitem">
+              <span class="row-num">01</span>
+              <div>
+                <h3>Start with the answer</h3>
+                <p>Every response opens with one governing thought, written as a decision-ready sentence.</p>
+              </div>
+            </article>
+            <article role="listitem">
+              <span class="row-num">02</span>
+              <div>
+                <h3>Group the support</h3>
+                <p>Supporting points are compact, parallel, and easy to scan before the reader goes deeper.</p>
+              </div>
+            </article>
+            <article role="listitem">
+              <span class="row-num">03</span>
+              <div>
+                <h3>Attach the proof</h3>
+                <p>Citations stay visible, so every synthesized claim can be traced back to a source page.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof-band" id="proof" aria-labelledby="proof-title">
+      <div class="section-inner proof-grid">
+        <div class="section-heading">
+          <p class="kicker">Why it feels professional</p>
+          <h2 id="proof-title">Less decoration. More judgment.</h2>
+        </div>
+        <article>
+          <span class="proof-label">Readable</span>
+          <h3>Clear typographic hierarchy</h3>
+          <p>Short line lengths, restrained headings, and consistent spacing keep the interface calm.</p>
+        </article>
+        <article>
+          <span class="proof-label">Credible</span>
+          <h3>Product surface first</h3>
+          <p>The hero shows the answer experience immediately instead of relying on abstract decoration.</p>
+        </article>
+        <article>
+          <span class="proof-label">Traceable</span>
+          <h3>Sources remain visible</h3>
+          <p>The answer design keeps citations attached to the synthesized conclusion.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>DocQuery demo: BM25 retrieval, PDF ingestion, Pyramid Principle answer formatting.</p>
+  </footer>
+</body>
+</html>

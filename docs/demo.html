@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Interactive DocQuery demo for building a sample PDF index and asking Pyramid Principle document questions."
+  />
+  <title>Interactive Demo | DocQuery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#demo">Skip to demo</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="index.html" aria-label="DocQuery home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>DocQuery</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#method">Method</a>
+        <a href="demo.html">Demo</a>
+        <a href="index.html#proof">Proof</a>
+      </div>
+      <span class="status-pill" id="backend-status">Checking backend</span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="demo-band demo-page" id="demo" aria-labelledby="demo-title">
+      <div class="section-inner">
+        <div class="section-heading compact">
+          <p class="kicker">Interactive demo</p>
+          <h1 id="demo-title">Build an index. Ask the document.</h1>
+          <p>
+            Use the sample report or upload PDFs. The demo calls your local
+            backend and returns answers in a Barbara Minto inspired Pyramid structure.
+          </p>
+        </div>
+
+        <div class="demo-shell">
+          <aside class="demo-rail" aria-label="Demo workflow">
+            <div class="rail-header">
+              <span>Workflow</span>
+              <strong id="workflow-state">Upload</strong>
+            </div>
+            <div class="stepper" role="tablist" aria-label="Demo steps">
+              <div class="stepper-track"><div class="stepper-fill" id="stepper-fill"></div></div>
+              <button type="button" class="stepper-step active" data-step="1">
+                <span>01</span> Upload
+              </button>
+              <button type="button" class="stepper-step" data-step="2">
+                <span>02</span> Index
+              </button>
+              <button type="button" class="stepper-step" data-step="3">
+                <span>03</span> Ask
+              </button>
+            </div>
+            <p class="rail-note">
+              This interface calls the local Python RAG API at
+              http://127.0.0.1:8000.
+            </p>
+          </aside>
+
+          <div class="demo-workspace">
+            <div class="demo-stage" id="panel-upload">
+              <div class="upload-grid">
+                <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload PDF files">
+                  <input type="file" id="file-input" accept=".pdf" multiple hidden />
+                  <div class="drop-icon" aria-hidden="true">
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 15V3" />
+                      <path d="m7 8 5-5 5 5" />
+                      <path d="M5 19h14" />
+                    </svg>
+                  </div>
+                  <p class="drop-title">Add PDF documents</p>
+                  <p class="drop-hint">Drop files here or click to browse</p>
+                </div>
+
+                <div class="upload-summary">
+                  <label class="toggle">
+                    <input type="checkbox" id="use-sample" checked />
+                    <span class="toggle-ui"></span>
+                    <span>Use sample annual report</span>
+                  </label>
+                  <div class="doc-list" id="doc-list" aria-live="polite">
+                    <div class="doc-row">
+                      <span class="doc-icon">PDF</span>
+                      <div>
+                        <strong>infosys.pdf</strong>
+                        <span>24 indexed chunks</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-primary full-width" id="btn-index">
+                    <span class="btn-text">Build index</span>
+                    <span class="btn-loader hidden" id="btn-loader"></span>
+                  </button>
+                  <div class="progress-wrap hidden" id="progress-wrap">
+                    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+                    <p class="progress-label" id="progress-label">Reading document structure</p>
+                  </div>
+                  <p class="form-note hidden" id="index-status"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="demo-stage hidden" id="panel-chat">
+              <div class="stats-bar">
+                <div class="stat">
+                  <span class="stat-val" id="doc-pill">1</span>
+                  <span class="stat-key">document</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-val" id="chunk-pill">24</span>
+                  <span class="stat-key">chunks</span>
+                </div>
+                <button type="button" class="btn btn-secondary small" id="btn-reset">Reset</button>
+              </div>
+
+              <div class="chat-window">
+                <div class="chat-messages" id="chat" aria-live="polite"></div>
+                <div class="chat-compose">
+                  <div class="chip-row" id="chip-row" aria-label="Suggested questions">
+                    <button type="button" class="chip" data-q="What was total revenue in FY2024?">Revenue</button>
+                    <button type="button" class="chip" data-q="What are the top three risks?">Risks</button>
+                    <button type="button" class="chip" data-q="How did operating margin change?">Margin</button>
+                  </div>
+                  <form class="compose-form" id="chat-form">
+                    <input type="text" id="chat-input" placeholder="Ask a question about the documents" autocomplete="off" />
+                    <button type="submit" class="btn btn-send" aria-label="Send question">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="m13 6 6 6-6 6" />
+                      </svg>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>DocQuery interactive demo: PDF ingestion, BM25 retrieval, Pyramid Principle answers.</p>
+  </footer>
+
+  <script src="js/demo.js"></script>
+</body>
+</html>
