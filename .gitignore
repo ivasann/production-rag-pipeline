@@ -1,0 +1,13 @@
+# Ignore local environment and generated files
+.env
+src/.env
+*.env
+.venv/
+__pycache__/
+*.pyc
+.streamlit/
+.vscode/
+qdrant_data/
+src/__pycache__/
+src/qdrant_data/
+src/data/
